@@ -1,0 +1,25 @@
+.manage-product {
+  background-color: var(--secondary-bg-color);
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.acttion-button {
+  padding: 10px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  font-size: 20px;
+  background-color: var(--main-bg-button-color);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+.acttion-button:hover {
+  background-color: var(--main-bg-button-color-hover);
+  color: var(--secondary-text-color);
+}
+
+h1 {
+  margin: 15px;
+}

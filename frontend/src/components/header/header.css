@@ -1,0 +1,125 @@
+/* body {
+  margin: 0px;
+} */
+
+.rightNavBar a,
+.rightNavBar a,
+.rightNavBar a,
+.rightNavBar a {
+  text-decoration: none;
+  color: white;
+}
+
+.rightNavBar a:hover {
+  text-decoration: none;
+  color: #c59640;
+}
+
+select {
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  font-size: 20px;
+  font-weight: 500;
+}
+
+select:hover {
+  cursor: pointer;
+}
+
+.search-button {
+  /* margin-left: 2px; */
+  border: 1px solid white;
+  border-radius: 5px;
+  height: 33px;
+}
+
+.search-button:hover {
+  cursor: pointer;
+}
+
+.navBar {
+  height: 70px;
+  display: flex;
+  padding: 15px;
+  /* gap: 10px; */
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: rgb(15, 6, 56); */
+  background-color: var(--main-bg-color);
+}
+
+.leftNavBar {
+  display: flex;
+  gap: 3px;
+  padding-left: 15px;
+  /* height: 30px; */
+  align-items: center;
+}
+
+.leftNavBar select {
+  height: 34px;
+}
+
+.rightNavBar {
+  display: flex;
+  /* gap: 10px; */
+  font-size: 18px;
+  padding-right: 15px;
+  align-items: center;
+}
+
+.accountSettings {
+  display: flex;
+  gap: 10px;
+  font-size: 18px;
+  padding-right: 15px;
+  align-items: center;
+}
+
+.accountSettings a {
+  text-decoration: none;
+  color: rgba(15, 6, 56, 1, 0.6);
+}
+
+.accountSettings a:hover {
+  color: red;
+}
+
+.accountSettings img:hover {
+  cursor: pointer;
+}
+
+.websiteName {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 40px;
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+}
+
+.websiteName:hover {
+  cursor: pointer;
+  color: #c59640;
+}
+
+.search-bar {
+  width: 25vw;
+  /* border: 1px solid rgba(0, 0, 0, 0.3); */
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.display-name {
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  margin-right: 20px;
+}
+
+.display-name:hover {
+  color: #c59640;
+}
