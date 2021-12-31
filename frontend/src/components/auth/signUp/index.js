@@ -33,14 +33,7 @@ const Register = () => {
                 registerContext.setLasttName(e.target.value);
               }}
             ></input>
-            {/* <input
-              className="input"
-              type="text"
-              placeholder="City"
-              onChange={(e) => {
-                registerContext.setCity(e.target.value);
-              }}
-            ></input> */}
+            
             <input
               className="input"
               type="email"
@@ -72,7 +65,6 @@ const Register = () => {
               Sign-Up
             </button>
           </form>
-          {/* to fix the message to have succes and failure so each message would have a differnet color */}
           {registerContext.message && (
             <div style={{ color: "red" }}>{registerContext.message}</div>
           )}

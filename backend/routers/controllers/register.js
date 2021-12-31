@@ -7,19 +7,19 @@ const createUser = async (req, res) => {
   let { firstName,lasttName,email,password} = req.body;
   console.log(firstName);
   if (!firstName) {
-    console.log("please fill first name text1111");
+    console.log("please fill first name text");
     res.json("please fill first name text").status(400);
   }
   else if (!lasttName) {
-    console.log("please fill first name text2222");
+    console.log("please fill first name text");
     res.json("please fill lastt name text").status(400);
   }
   else if (!password) {
-    console.log("please fill first name text3333");
+    console.log("please fill first name text");
     res.json("please fill password text").status(400);
   }
   else if (!email) {
-    console.log("please fill first name text1444");
+    console.log("please fill first name text");
     res.json("please fill email text").status(400);
   } else {
     const query = `INSERT INTO user (firstName,lasttName,email,password) VALUES (?,?,?,?)`;

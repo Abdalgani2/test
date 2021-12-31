@@ -26,7 +26,7 @@ const Login = () => {
   return (
     <div className="login-body">
       <div className="login">
-        <p style={{ color: "black", fontSize: "30px" }}>Jordan Commerce</p>
+        <p style={{ color: "black", fontSize: "30px" }}> Commerce</p>
         <form onSubmit={handleSubmit} className="login-form">
           <input
             className="input"
