@@ -1,49 +1,119 @@
-import React, { useContext, useState } from "react";
-import { Route, Switch } from "react-router-dom";
-import Register from "./components/auth/signUp/index";
-import Header from "./components/header/index";
-import Main from "./components/main/index";
-import Login from "./components/auth/login/index";
-import ProductDetails from "./components/productDetails";
-import SearchProduct from "./components/searchProduct";
-import Cart from "./components/cart/cart";
-import { ItemCardContext } from "./../src/contexts/main";
-import { HeaderContext } from "./contexts/header";
-import { LoginContext } from "./contexts/login";
-import CreateProduct from "./components/createProduct/index";
-import History from "./components/history/index";
+
+import { userContext } from './context/userContext';
+import jwt from 'jwt-decode'
+import Axios from "axios";
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate
+} from "react-router-dom";
+import { useState, useEffect, useCallback } from 'react';
+import SignUp from "./components/signUp/signUp";
+import Login from './components/signIn/signIn';
+import Home from './components/home/Home';
+import Product from './components/product/product';
+import AddItem from './components/addItem/addItem';
+import SearchItem from './components/searchItems/searchItems'
 
 
+function App() {
+  let t = localStorage.getItem("auth-token");
 
 
-const App = () => {
-  const itemCardContext = useContext(ItemCardContext);
-  const headerContext = useContext(HeaderContext);
-  const [cartData, setCartData] = useState([]);
+  const [token, setToken] = useState(t);
+  const [userId, setUserId] = useState(false);
+  const [admin, setAdmin] = useState(false);
+ 
+  const loggedRoutes = <Routes>
+    <Route path='/signUp' element={<SignUp />} />
+    <Route path='/signIn' element={<Login />} />
+    <Route path='/' element={<Home />} />
+    <Route path='/product' element={<Product />} />
+    <Route path='/addItem' element={<AddItem />} />
+    <Route path='/Search' element={<SearchItem />} />
+  </Routes>;
+  const adminRoutes = <Routes>
+  
+  </Routes>;
+  const regroute = <Routes>
+    <Route path='/signUp' element={<SignUp />} />
+    <Route path='/signIn' element={<Login />} />
+    <Route path='/' element={<Home />} />
+     <Route path='/product' element={<Product />} />
+    <Route path='/addItem' element={<AddItem />} /> 
+    <Route path='/Search' element={<SearchItem />} />
+  </Routes>;
+  const [routes, setRoutes] = useState(regroute);
+
+  const login = useCallback((uid, token) => {
+    setToken(token);
+    setUserId(uid);
+  }, []);
+
+  const logout = useCallback(() => {
+    setToken(null);
+    setUserId(null);
+    setAdmin(null);
+  }, []);
+
+  useEffect(() => {
+    let token = localStorage.getItem("auth-token");
+    if (token === null) {
+      localStorage.setItem("auth-token", "");
+      token = "";
+      setToken();
+      setRoutes(regroute);
+    }
+    else if (token) {
+      const user = jwt(token);
+      console.log("jwt(token)",jwt(token));
+      console.log(user.admin);
+      console.log("token",token);
+
+       if (user.admin) {
+        setAdmin(true);
+        setRoutes(adminRoutes);
+      }
+      else {
+        setAdmin(false);
+        setRoutes(loggedRoutes);
+      }
+    }
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+    const bodyParameters = {
+      key: "value"
+    };
+    console.log(token);
+    Axios.post('http://localhost:4000/isValid', bodyParameters, config).then(result => {
+      console.log(result);
+      if (result.data.token === false) {
+        localStorage.setItem("auth-token", "");
+        setToken(false);
+      }
+
+    })
+  }, []);
 
   return (
-    <div className="App">
-      <Header />
-      <Route path="/register" component={Register} />
-      <Route exact path="/" component={Main} />
-      <Route path="/login" component={Login} />
-      <Route path="/show/cart" render={() => <Cart item={itemCardContext.found} />}  />
-      <Route
-        path="/product/details"
-        render={() => <ProductDetails item={itemCardContext.found} />}
-      />
-      <Route
-        path="/search/product"
-        render={() => <SearchProduct item={headerContext.found} />}
-      />
-      <Route
-        path="/create/product"
-        render={() => <CreateProduct item={LoginContext.found} />}
-      />
-      
+    <userContext.Provider value={
+      {
+        isLoggedIn: !!token,
+        token: token,
+        userId: userId,
+        login: login,
+        logout: logout
+      }
+    }>
 
-    </div>
+
+      {routes}
+
+    </userContext.Provider>
   );
-};
+}
 
 export default App;
